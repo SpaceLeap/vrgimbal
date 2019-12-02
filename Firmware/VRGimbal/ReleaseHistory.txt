@@ -1,0 +1,52 @@
+//*******************************************************************
+// VR Gimbal release history
+//*******************************************************************
+
+//*******************************************************************
+//  v1.12  - 
+//*******************************************************************
+
+Corretta la conversione dei valori Joystick nel caso di input digitali (che prevedono Mid=Max oppure Mid=Min)
+Inserita la calibrazione dell'accelerometro con salvataggio.
+
+
+
+//*******************************************************************
+//  v1.11  - 
+//*******************************************************************
+
+Modificate le routine IMU per gestire la compensazione di Yaw e Roll quando Pitch != 0 così 
+da poter gestire lo yaw anche con una sola IMU.
+
+Reso più dolce il reset della posizione (tenendo alto il valore del canale associato al reset,
+l'angolo viene riportato a zero con lo stesso passa-basso della modalità assoluta) 
+
+
+//*******************************************************************
+//  v1.10 b  - 30/09/2013
+//*******************************************************************
+
+
+
+//*******************************************************************
+//  v1.10 a  - 30/09/2013
+//*******************************************************************
+
++ BLcontroller.cpp
+Modificata la gestione della funzione seno precalcolata: ora si utilizza un solo array float[1024] per tutti i motori.
+Inserita la possibilità di cambiare frequenza PWM in runtime.
+
++ RCdecode.cpp
+Inseriti tre nuovi canali per gestire il comando di azzeramento dell'offset su roll, pitch a yaw, in modo che
+in modalità RELATIVE si possa riportare a zero in modo semplice l'angolo su ciascun asse (quando il canale corrispondente
+supera i 1500, il PhiSet di quell'asse viene impostato istantaneamente a zero, di conseguenza angleSet grazie al 
+filtro passa basso porta dolcemente l'asse a 0).
+
++ variables.h
+Aggiunti parametri
+- pwmFrequency
+- rcChannelResetPitch
+- rcChannelResetRoll
+- rcChannelResetYaw
+
+
